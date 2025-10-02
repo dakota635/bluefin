@@ -292,3 +292,24 @@ sections:
     appids:
       - com.jeffser.Alpaca
       - io.github.qwersyk.Newelle
+hooks:
+  - id: handle-jetbrains
+    when: before-transaction
+    dialogs:
+      - id: jetbrains-warning
+        title: >-
+          Jetbrains IDEs are not supported in this format
+        body-use-markup: true
+        body: >-
+          This is a <a href="https://www.jetbrains.com/">JetBrains</a> 
+          application and isn’t officially supported on Flatpak. You can 
+          install and manage JetBrains IDEs by selecting "Install JetBrains 
+          Toolbox" to install the Toolbox application.
+        default-response-id: cancel
+        options:
+          - id: cancel
+            string: "Cancel"
+          - id: goto-web
+            string: "Install Jetbrains Toolbox"
+            style: suggested
+    shell: exec /usr/share/ublue-os/bazaar/hooks/jetbrains-toolbox.bash
